@@ -534,13 +534,17 @@ SNAPPROP="-o com.sun:auto-snapshot-desc='$opt_event'"
 
 # ISO style date; fifteen characters: YYYY-MM-DD-HHMM
 # On Solaris %H%M expands to 12h34.
-DATE=$(date --utc +%F-%H%M)
+#DATE=$(date --utc +%F-%H%M)
+# ISO style date; fifteen characters: YYYY-MM-DD-UTCHHMM:HHMM
+DATE="$(date --utc +%F-UTC%H%M):$(date +%H%M)"
 
 # The snapshot name after the @ symbol.
 SNAPNAME="$opt_prefix${opt_label:+$opt_sep$opt_label}-$DATE"
 
 # The expression for matching old snapshots.  -YYYY-MM-DD-HHMM
-SNAPGLOB="$opt_prefix${opt_label:+?$opt_label}????????????????"
+#SNAPGLOB="$opt_prefix${opt_label:+?$opt_label}????????????????"
+# The expression for matching old snapshots.  -YYYY-MM-DD-UTCHHMM:HHMM
+SNAPGLOB="$opt_prefix${opt_label:+?$opt_label}????????????????????????"
 
 if [ -n "$opt_do_snapshots" ]
 then
